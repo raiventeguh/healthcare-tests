@@ -23,7 +23,17 @@ Feature: Login Feature
   @Valid
   Scenario Outline: Login with Valid Credential
     When I Hit Login API Endpoint with <username> and <password>
+    Then The response should be <status>
 
     Examples: 
-      | username           | password |
-      | creator@upbanx.com | password |
+      | username           | password | status  |
+      | creator@upbanx.com | password | success |
+  
+  @NotValid
+  Scenario Outline: Login with NotValid Credential
+    When I Hit Login API Endpoint with <username> and <password>
+    Then The response should be <status>
+
+    Examples: 
+      | username           | password     | status |
+      | creator@upbanx.com | not_password | failed |
